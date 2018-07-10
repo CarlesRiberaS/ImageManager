@@ -68,34 +68,15 @@ testImageManager = function(dir){
 
 
 function routeRequests(req, res){
-  //console.log("req.url: " + req.url);
+
   var urlObj = urlp.parse(req.url, true);
 
   // TODO
 
       res.writeHead(200, {'Content-Type': 'text/html'});
       fs.createReadStream('view/index.html').pipe(res);
-      //console.log("---------");
-      //console.log(path.parse(urlObj.query));
-      //console.log(path.parse(urlObj.query.URL).dir + "/test1_1.html");
-      //request.get(urlObj.query.URL).pipe(fs.createWriteStream('page.txt'));
-      //console.log("---------");
-      console.log(typeof(urlObj.query.URL));
-      /*if (req.url != '/'){
-        try {
-
-          startCrawling(req,res, urlObj.query );
-        } catch (e) {
-
-        } finally {
-
-        }
-
-      }*/
-
       testImageManager(urlObj.query.URL);
 
-      //res.end();
 
 }
 http.createServer(routeRequests).listen(8081);
