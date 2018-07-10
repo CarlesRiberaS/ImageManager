@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path')
 
 imageManager = function (){
   this._dir = null;
@@ -26,7 +27,7 @@ imageManager = function (){
 testImageManager = function(){
   var count = 0;
   im = new imageManager();
-  im.setDir('./0.jpg/2014');
+  im.setDir('./0.jpg');
   fs.readdir(im.getDir(),function(err,files){
     if(!err){
       files.forEach(function(e){
@@ -37,7 +38,7 @@ testImageManager = function(){
           if(es.isDirectory()){
             console.log('directory detected');
           }else{
-            fs.rename(im.getDir() + '/'+e, im.getDir() +'/'+(es.mtime.getYear()+1900).toString() + '/' + es.mtime.toString() + '_'+Math.floor(Math.random()*(1000000-1))+1 + '.jpg',function(err){
+            fs.rename(im.getDir() + '/'+e, im.getDir() +'/'+(es.mtime.getYear()+1900).toString() + '/' + es.mtime.toString() + '_'+Math.floor(Math.random()*(1000000-1))+1 + path.extname(e),function(err){
               if(err){
                 console.log(err);
               }else{
